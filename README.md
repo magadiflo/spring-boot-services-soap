@@ -28,3 +28,10 @@ dichas clases simplemente ejecutar el proyecto con maven:
 ````
 .\mvnw clean package
 ````
+
+# Servicio SOAP Mockeado con SOAP UI
+Abrir con SOAP UI y ejecutar el MOCK. 
+Se trabajó sobre el método: **GetCityWeatherByZIP**
+````
+/src/main/resources/soapUI/Weather-soapui-project.xml
+````
