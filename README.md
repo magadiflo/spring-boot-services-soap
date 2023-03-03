@@ -18,5 +18,13 @@ http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?W
 Number Conversion
 ``````
 https://www.dataaccess.com/webservicesserver/numberconversion.wso?WSDL
-```
+``````
 
+## Generando las clases Java a partir del Documento WSDL
+Una vez agregado las dependencias y haber realizado algunas configuraciones, es momento
+de generar las clases java a partir del documento WSDL del servicio SOAP. Para generar
+dichas clases simplemente ejecutar el proyecto con maven:
+
+````
+.\mvnw clean package
+````
