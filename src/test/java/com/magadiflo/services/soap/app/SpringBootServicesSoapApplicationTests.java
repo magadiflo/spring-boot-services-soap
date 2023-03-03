@@ -45,7 +45,7 @@ class SpringBootServicesSoapApplicationTests {
         GetCityWeatherByZIP request = new GetCityWeatherByZIP();
         request.setZIP("4544445");
         GetCityWeatherByZIPResponse response = (GetCityWeatherByZIPResponse) client.callWebServices(clientEndPoint, request);
-        Assertions.assertEquals(true, response.getGetCityWeatherByZIPResult().isSuccess());
+        Assertions.assertTrue(response.getGetCityWeatherByZIPResult().isSuccess());
     }
 
 }
