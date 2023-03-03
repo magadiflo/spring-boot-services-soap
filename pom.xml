@@ -15,11 +15,33 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>17</java.version>
+        <!--WSDL Del servicio SOAP Mockeado en SOAP UI-->
+        <endpointwsdl>http://localhost:8088/WeatherWS/Weather.asmx?WSDL</endpointwsdl>
     </properties>
     <dependencies>
+        <!--Facilita el desarrollo de SOAP de contrato primero. Permite la creación de servicios web flexibles
+        utilizando una de las muchas formas de manipular las cargas útiles XML.-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+        <!--Exponer repositorios de Spring Data sobre REST a través de Spring Data REST.-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <!-- Dependency of WSDL4J; document analysis WSDL -->
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+        </dependency>
+
+        <!--Esto descargará los archivos JAR necesarios para compilar y ejecutar servicios
+        web Java XML en el entorno de servlet.-->
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.3.2</version>
         </dependency>
 
         <dependency>
@@ -34,6 +56,33 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--Configuration for create Client WSDL-->
+            <!--Permitirá realizar la ingeniería inversa. A partir del contrato WSDL generará las clases
+            y especificaciones necesarias para que se pueda utilizar-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>wsdltoJava</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <encoding></encoding>
+                    <verbose>true</verbose>
+                    <sourceDestDir>src/main/java</sourceDestDir>
+                    <wsdlUrls>
+                        <wsdlUrl>${endpointwsdl}</wsdlUrl>
+                    </wsdlUrls>
+                    <vmArgs>
+                        <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                    </vmArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>
